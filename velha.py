@@ -28,11 +28,11 @@ def get_position(pos):
         return False
 
 def draw(matrix):
-    # Return when the board is full
+    # Return when the board is full and nobody wins.
     if '_' not in matrix[0] and '_' not in matrix[1] and '_' not in matrix[2]: return True
 
 def is_winner(simbol, matrix):
-    # Check if a row, column or diagol is complete
+    # Check if a row, column or diagonal is complete
     if matrix[0][0] == simbol and matrix[0][1] == simbol and matrix[0][2] == simbol: return True
     if matrix[1][0] == simbol and matrix[1][1] == simbol and matrix[1][2] == simbol: return True
     if matrix[2][0] == simbol and matrix[2][1] == simbol and matrix[2][2] == simbol: return True
@@ -140,10 +140,10 @@ while op:
     else:
         sPC = 'X'
         sVC = 'O'
-    round = 0
+    turn = 0
     game = True
     while game:
-        round += 1
+        turn += 1
         if draw(matrix):
             print_matrix(matrix)
             tie+=1
@@ -191,7 +191,7 @@ while op:
                     pc = one_left(sPC, matrix)
                 elif one_left(sVC, matrix):
                     pc = one_left(sVC, matrix)
-                elif round < 5 and prevent(sVC, matrix):
+                elif turn < 5 and prevent(sVC, matrix):
                     pc = random.choice(prevent(sVC, matrix))
                 else:
                     pc = random.randint(1, 9)
